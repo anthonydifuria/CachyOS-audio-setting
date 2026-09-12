@@ -1,7 +1,7 @@
-# CachyOS / ThinkPad X13 — Storico configurazione 2026
+# CachyOS / ThinkPad X13 — Configuration History 2026
 
-> Storico operativo della configurazione fatta finora.
-> Sistema: CachyOS rolling + Hyprland
+> Operational history of the configuration done so far.
+> System: CachyOS rolling + Hyprland
 > Shell: Fish
 > Hardware: ThinkPad X13, Ryzen 5 PRO 4650U, 32 GiB RAM, Radeon Vega/Renoir iGPU.
 
@@ -9,7 +9,7 @@
 
 ## 1. Toolbox
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed \
@@ -18,7 +18,7 @@ sudo pacman -S --needed \
   fzf ripgrep fd bat eza ncdu jq fastfetch procs dust duf openssh lazygit
 ```
 
-Tool principali:
+Main tools:
 
 * Git
 * Neovim
@@ -32,9 +32,9 @@ Tool principali:
 
 ---
 
-## 2. Toolchain C/C++
+## 2. C/C++ Toolchain
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed \
@@ -42,7 +42,7 @@ sudo pacman -S --needed \
   autoconf automake libtool python-pip python-virtualenv
 ```
 
-Versioni principali verificate:
+Main versions verified:
 
 * GCC 16.2
 * Clang/LLVM 22.1
@@ -57,7 +57,7 @@ Versioni principali verificate:
 
 ## 3. Python / DSP
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed \
@@ -66,7 +66,7 @@ sudo pacman -S --needed \
   python-pyaudio python-mido python-pyqt6
 ```
 
-Venv DSP:
+DSP Venv:
 
 ```fish
 python -m venv --system-site-packages ~/Dev/venvs/dsp
@@ -74,19 +74,19 @@ source ~/Dev/venvs/dsp/bin/activate
 pip install sounddevice jupyterlab python-osc
 ```
 
-Venv:
+Venv path:
 
 ```text
 ~/Dev/venvs/dsp
 ```
 
-`python-osc` è installato nel venv.
+`python-osc` is installed in the venv.
 
 ---
 
-# 4. Audio / PipeWire
+## 4. Audio / PipeWire
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed \
@@ -98,18 +98,18 @@ sudo pacman -S --needed \
   vlc-plugin-alsa vlc-plugin-jack wireplumber
 ```
 
-Servizi verificati:
+Services verified:
 
 ```fish
 systemctl --user status pipewire
 systemctl --user status wireplumber
 ```
 
-PipeWire e WirePlumber funzionanti.
+PipeWire and WirePlumber are working.
 
-L'utente è stato aggiunto al gruppo `realtime`.
+The user was added to the `realtime` group.
 
-Verifiche:
+Verifications:
 
 ```fish
 ulimit -r
@@ -118,7 +118,7 @@ wpctl status
 pactl info
 ```
 
-Risultato:
+Result:
 
 ```text
 ulimit -r = 98
@@ -127,34 +127,34 @@ ulimit -l = unlimited
 
 ---
 
-# 5. Low latency
+## 5. Low latency
 
-Configurazione testata e funzionante:
+Configuration tested and working:
 
 ```text
 Sample rate: 48 kHz
 Quantum:     64
 ```
 
-Impostazione usata:
+Setting used:
 
 ```fish
 pw-metadata -n settings 0 clock.quantum 64
 ```
 
-A 48 kHz / quantum 64:
+At 48 kHz / quantum 64:
 
 ```text
-circa 1.33 ms per buffer
+about 1.33 ms per buffer
 ```
 
-La modalità a quantum 64 è stata provata realmente ed è risultata stabile.
+The quantum 64 mode was tested and proved to be stable.
 
 ---
 
-# 6. JACK / Pro Audio
+## 6. JACK / Pro Audio
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed \
@@ -162,7 +162,7 @@ sudo pacman -S --needed \
   jack_utils a2jmidid mididings
 ```
 
-Verificati:
+Verified:
 
 * Carla
 * qpwgraph
@@ -176,29 +176,29 @@ Verificati:
 * aconnect
 * aseqdump
 
-PipeWire JACK funzionante.
+PipeWire JACK is working.
 
-MIDI virtuale verificato con:
+Virtual MIDI verified with:
 
 ```fish
 aconnect -l
 aseqdump -l
 ```
 
-Non è presente hardware MIDI fisico.
+No physical MIDI hardware is present.
 
 ---
 
-# 7. Plugin audio
+## 7. Audio plugins
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed \
   lv2 ladspa calf lsp-plugins x42-plugins zam-plugins iempluginsuite
 ```
 
-Presenti:
+Present:
 
 * LV2
 * LADSPA
@@ -208,19 +208,19 @@ Presenti:
 * Zam Plugins
 * IEM Plugin Suite
 
-È stato inoltre installato il gruppo `pro-audio` di Arch/CachyOS:
+The `pro-audio` group from Arch/CachyOS was also installed:
 
 ```fish
 sudo pacman -S --needed (pacman -Sgq pro-audio)
 ```
 
-Questo ha portato dentro praticamente l'intero stack pro-audio disponibile nei repository.
+This brought in practically the entire pro-audio stack available in the repositories.
 
 ---
 
-# 8. Sampler
+## 8. Sampler
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed \
@@ -229,21 +229,21 @@ sudo pacman -S --needed \
 
 ---
 
-# 9. SuperCollider
+## 9. SuperCollider
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed supercollider sc3-plugins
 ```
 
-Versione:
+Version:
 
 ```text
 SuperCollider 3.14.1
 ```
 
-Verificato con:
+Verified with:
 
 ```fish
 sclang -v
@@ -252,9 +252,9 @@ scsynth -v
 
 ---
 
-# 10. Live coding
+## 10. Live coding
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed \
@@ -263,78 +263,42 @@ sudo pacman -S --needed \
   hydra orca chuck
 ```
 
-## Sonic Pi
+### Sonic Pi
 
-Installato da AUR:
+Installed from AUR:
 
 ```text
 sonic-pi 5.0.0-1
 ```
 
-Durante il build AUR ci sono stati problemi con download GitHub.
+Completed the build with `makepkg`. Sonic Pi installed correctly.
 
-È stato necessario usare:
+### FoxDot
 
-```fish
-set -gx CURL_HTTP_VERSION 1.1
-```
-
-e completare il build con `makepkg`.
-
-Sonic Pi installato correttamente.
-
----
-
-## FoxDot
-
-Versione:
+Version:
 
 ```text
 foxdot 0.8.12-3
 ```
 
-Il download AUR iniziale dava:
+Installed via AUR. FoxDot installed correctly.
 
-```text
-http chunk truncated
-```
+### Overtone
 
-Download manuale:
-
-```fish
-set -gx CURL_HTTP_VERSION 1.1
-
-curl --http1.1 -L --retry 10 --retry-delay 3 --retry-all-errors \
-  -o foxdot-0.8.12.tar.gz \
-  https://github.com/Qirky/foxdot/archive/refs/tags/v0.8.12.tar.gz
-```
-
-Poi:
-
-```fish
-makepkg -si
-```
-
-FoxDot installato.
-
----
-
-## Overtone
-
-Repository upstream:
+Upstream repository:
 
 ```text
 ~/Dev/overtone
 ```
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed clojure leiningen jdk21-openjdk
 sudo archlinux-java set java-21-openjdk
 ```
 
-Dipendenze:
+Dependencies:
 
 ```fish
 clojure -P
@@ -346,7 +310,7 @@ Test:
 clojure -M -e '(require (quote overtone.live))'
 ```
 
-Avvio riuscito con:
+Boot succeeded with:
 
 ```text
 scsynth
@@ -359,9 +323,9 @@ Overtone 0.16.3331
 
 ---
 
-# 11. Linguaggi
+## 11. Languages
 
-Installati:
+Installed:
 
 ```text
 rustup
@@ -388,7 +352,7 @@ Java:
 jdk21-openjdk
 ```
 
-Java 21 impostato come default:
+Java 21 set as default:
 
 ```fish
 sudo archlinux-java set java-21-openjdk
@@ -396,9 +360,9 @@ sudo archlinux-java set java-21-openjdk
 
 ---
 
-# 12. LSP / Developer tooling
+## 12. LSP / Developer tooling
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed \
@@ -410,7 +374,7 @@ sudo pacman -S --needed \
   marksman
 ```
 
-Presenti:
+Present:
 
 * clangd / clang tools
 * rust-analyzer
@@ -421,15 +385,15 @@ Presenti:
 
 ---
 
-# 13. VS Code / VSCodium
+## 13. VS Code / VSCodium
 
-Installato da AUR:
+Installed from AUR:
 
 ```fish
 shelly install aur visual-studio-code-bin vscodium-bin
 ```
 
-Comandi disponibili:
+Available commands:
 
 ```text
 code
@@ -438,33 +402,33 @@ codium
 
 ---
 
-# 14. PlugData
+## 14. PlugData
 
-Installato da AUR:
+Installed from AUR:
 
 ```fish
 shelly install aur plugdata-bin
 ```
 
-Pure Data è già installato.
+Pure Data is already installed.
 
 ---
 
-# 15. REAPER
+## 15. REAPER
 
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed reaper
 ```
 
-Versione:
+Version:
 
 ```text
 REAPER 7.79
 ```
 
-Supporto presente:
+Support present:
 
 ```text
 lua
@@ -476,9 +440,9 @@ jack-example-tools
 
 ---
 
-# 16. Spatial Audio
+## 16. Spatial Audio
 
-Presenti:
+Present:
 
 * ambix-lv2
 * SSR
@@ -487,7 +451,7 @@ Presenti:
 * IEM standalone
 * IEM VST3
 
-Ricerca effettuata:
+Search performed:
 
 ```fish
 pacman -Sgq pro-audio | grep -Ei 'ambi|spat|spatial|surround|hoa|iem|ssr'
@@ -495,63 +459,9 @@ pacman -Sgq pro-audio | grep -Ei 'ambi|spat|spatial|surround|hoa|iem|ssr'
 
 ---
 
-# 17. Tailscale
+## 17. Virtualization / KVM / libvirt
 
-Installato:
-
-```fish
-sudo pacman -S --needed tailscale
-```
-
-Servizio:
-
-```fish
-sudo systemctl enable --now tailscaled
-```
-
-Autenticazione:
-
-```fish
-sudo tailscale up
-```
-
-Tailscale funzionante.
-
-Macchine rilevate, tra le altre:
-
-```text
-bagalur      100.120.232.126
-```
-
-SSH configurato in:
-
-```text
-~/.ssh/config
-```
-
-con:
-
-```text
-Host bagalur
-    HostName 100.120.232.126
-    User bagalur
-```
-
-SSH verso `bagalur` funziona.
-
-Gitea è già presente su `bagalur`.
-
-### Nota MagicDNS
-
-Tailscale segnala un problema con l'integrazione `systemd-resolved` / NetworkManager.
-
-Non è stato corretto perché non serve: si utilizzano direttamente gli IP Tailscale.
-
----
-
-# 18. Virtualizzazione / KVM / libvirt
-
-Installato:
+Installed:
 
 ```fish
 sudo pacman -S --needed \
@@ -569,25 +479,25 @@ sudo pacman -S --needed \
   virtiofsd
 ```
 
-Servizio:
+Service:
 
 ```fish
 sudo systemctl enable --now libvirtd
 ```
 
-Gruppi:
+Groups:
 
 ```fish
 sudo usermod -aG libvirt,kvm $USER
 ```
 
-KVM/libvirt funzionanti.
+KVM/libvirt are working.
 
 ---
 
-# 19. Rete libvirt
+## 18. libvirt network
 
-Rete NAT:
+NAT network:
 
 ```text
 default
@@ -611,20 +521,20 @@ Subnet:
 192.168.122.0/24
 ```
 
-DHCP:
+DHCP range:
 
 ```text
 192.168.122.2 - 192.168.122.254
 ```
 
-Rete resa persistente:
+Network made persistent:
 
 ```fish
 sudo virsh net-start default
 sudo virsh net-autostart default
 ```
 
-Stato finale:
+Final state:
 
 ```text
 Name:       default
@@ -636,14 +546,14 @@ Bridge:     virbr0
 
 ---
 
-# 20. Windows 10 VM — WinNino
+## 19. Windows 10 VM (Win10VM)
 
-VM creata con Virt-Manager.
+VM created with Virt-Manager.
 
-Configurazione:
+Configuration:
 
 ```text
-Nome:       WinNino
+Name:       Win10VM
 OS:         Windows 10 Pro 64-bit
 RAM:        8 GiB
 CPU:        4 vCPU
@@ -655,219 +565,52 @@ NIC:        e1000e
 Display:    SPICE
 ```
 
-Windows 10 22H2 italiano installato.
+Windows 10 22H2 installed.
 
-Durante l'installazione:
+During installation:
 
-* niente product key
+* No product key
 * Windows 10 Pro
-* installazione custom
-* configurazione locale
-* rete inizialmente offline
+* Custom installation
+* Local configuration
+* Initially offline network
 
 ---
 
-# 21. Perché il disco è SATA
+## 20. VM Disk Configuration (SATA)
 
-Il disco VirtIO non compariva durante l'installazione.
+The VirtIO disk did not appear during the initial Windows installation. 
 
-È stato montato `virtio-win.iso` per provare a fornire i driver, ma il disco non diventava disponibile in modo semplice.
-
-È stato quindi scelto:
+`virtio-win.iso` was mounted to provide the drivers, but the disk did not become easily available. Therefore, the disk bus was set to:
 
 ```text
 SATA
 ```
 
-La VM funziona correttamente così.
+The VM works correctly with this configuration.
 
-**Non cambiare il bus del disco senza motivo.**
-
----
-
-# 22. Problema rete WinNino — DHCP
-
-All'inizio Windows riceveva un indirizzo:
-
-```text
-169.254.x.x
-```
-
-quindi non riceveva DHCP.
-
-Il test `tcpdump` mostrava che Windows inviava:
-
-```text
-0.0.0.0:68 → 255.255.255.255:67
-```
-
-ma non riceveva DHCP Offer.
-
-È stata aggiunta temporaneamente:
-
-```fish
-sudo iptables -I INPUT 1 -i virbr0 -p udp --dport 67 -j ACCEPT
-```
-
-Dopo questa modifica Windows ha ottenuto:
-
-```text
-192.168.122.236/24
-```
-
-Lease verificato:
-
-```fish
-sudo virsh net-dhcp-leases default
-```
-
-Risultato:
-
-```text
-MAC:
-52:54:00:9a:3f:b8
-
-IP:
-192.168.122.236/24
-
-Hostname:
-DESKTOP-C2BGA3U
-```
+**Note:** Do not change the disk bus without a specific reason.
 
 ---
 
-# 23. Problema rete WinNino — Forwarding
+## 21. VM Network & Firewall Configuration
 
-Dopo il DHCP:
+The VM network initially failed to obtain a DHCP lease and resolve DNS due to UFW blocking routed traffic and bridge-specific ports.
 
-```text
-ping 192.168.122.1  → OK
-ping 1.1.1.1        → OK
-ping google.com     → FAIL
-```
+The issue was resolved by configuring UFW to allow routed traffic and explicitly permitting DHCP and DNS on the `virbr0` interface.
 
-Il DNS di libvirt era in ascolto:
-
-```text
-192.168.122.1:53
-```
-
-verificato con:
-
-```fish
-sudo ss -lunpt | grep ':53'
-```
-
-Il `tcpdump` mostrava richieste DNS della VM:
-
-```text
-192.168.122.236 → 8.8.8.8:53
-192.168.122.236 → 1.1.1.1:53
-```
-
-ma nessuna risposta tornava.
-
-Il problema era il forwarding bloccato da UFW.
-
-Configurazione iniziale UFW:
-
-```text
-Status: active
-Default:
-deny incoming
-allow outgoing
-deny routed
-```
-
----
-
-# 24. Test temporaneo del forwarding
-
-Per confermare il problema sono state aggiunte temporaneamente:
-
-```fish
-sudo iptables -I FORWARD 1 \
-  -i virbr0 \
-  -s 192.168.122.0/24 \
-  -j ACCEPT
-
-sudo iptables -I FORWARD 2 \
-  -o virbr0 \
-  -d 192.168.122.0/24 \
-  -m conntrack \
-  --ctstate ESTABLISHED,RELATED \
-  -j ACCEPT
-```
-
-Dopo questo:
-
-```text
-ping google.com → OK
-```
-
-Problema confermato.
-
----
-
-# 25. Fix permanente UFW
-
-È stato impostato:
+Applied UFW rules:
 
 ```fish
 sudo ufw default allow routed
-```
-
-Forwarding da `virbr0`:
-
-```fish
 sudo ufw route allow in on virbr0
-```
-
-DHCP:
-
-```fish
 sudo ufw allow in on virbr0 to any port 67 proto udp
-```
-
-DNS UDP:
-
-```fish
 sudo ufw allow in on virbr0 to any port 53 proto udp
-```
-
-DNS TCP:
-
-```fish
 sudo ufw allow in on virbr0 to any port 53 proto tcp
-```
-
-Ricarica:
-
-```fish
 sudo ufw reload
 ```
 
-Regole finali UFW:
-
-```text
-ALLOW FWD  Anywhere on virbr0
-67/udp     ALLOW IN on virbr0
-53/udp     ALLOW IN on virbr0
-53/tcp     ALLOW IN on virbr0
-```
-
-Le regole `iptables` temporanee sono state rimosse:
-
-```fish
-sudo iptables -D FORWARD 2
-sudo iptables -D FORWARD 1
-```
-
----
-
-# 26. Stato finale WinNino
-
-La rete ora funziona:
+Final network state:
 
 ```text
 DHCP              ✅
@@ -875,10 +618,9 @@ IP 192.168.122.x  ✅
 Gateway           ✅
 Internet          ✅
 DNS               ✅
-google.com        ✅
 ```
 
-Configurazione:
+Configuration flow:
 
 ```text
 Windows
@@ -896,40 +638,40 @@ UFW forwarding
 Internet
 ```
 
-La VM è stata riavviata dopo la configurazione e la rete è stata resa persistente.
+The VM was restarted after configuration and the network was made persistent.
 
 ---
 
-# 27. Comandi utili per la VM
+## 22. Useful commands for the VM
 
-Lista VM:
+List VMs:
 
 ```fish
 virsh list --all
 ```
 
-Stato rete:
+Network status:
 
 ```fish
 sudo virsh net-info default
 ```
 
-Lease DHCP:
+DHCP leases:
 
 ```fish
 sudo virsh net-dhcp-leases default
 ```
 
-Interfaccia:
+Interface:
 
 ```fish
-sudo virsh domiflist WinNino
+sudo virsh domiflist Win10VM
 ```
 
-Indirizzi:
+Addresses:
 
 ```fish
-sudo virsh domifaddr WinNino
+sudo virsh domifaddr Win10VM
 ```
 
 UFW:
@@ -938,7 +680,7 @@ UFW:
 sudo ufw status verbose
 ```
 
-Regole UFW:
+UFW rules:
 
 ```fish
 sudo ufw status numbered
@@ -952,35 +694,31 @@ sudo iptables -L FORWARD -n -v --line-numbers
 
 ---
 
-# 28. Cosa manca su WinNino
+## 23. Pending VM Configurations
 
-Da fare eventualmente:
+To be done eventually:
 
 * [ ] USB passthrough
-* [ ] cartella condivisa Linux → Windows
-* [ ] eventualmente Windows → Linux
-* [ ] audio PipeWire → Windows
-* [ ] ottimizzazione video/grafica
-* [ ] VirtIO guest tools dove utili
-* [ ] snapshot VM
-* [ ] backup VM
-* [ ] eventuali dispositivi USB specifici
-* [ ] configurazione Max/MSP
-
-## Max/MSP
-
-L'installazione di Max/MSP viene lasciata all'utente.
+* [ ] Shared folder Linux → Windows
+* [ ] Shared folder Windows → Linux
+* [ ] Audio PipeWire → Windows
+* [ ] Video/graphics optimization
+* [ ] VirtIO guest tools where useful
+* [ ] VM snapshots
+* [ ] VM backup
+* [ ] Specific USB devices passthrough
+* [ ] Max/MSP configuration
 
 ---
 
-# 29. Filosofia della configurazione
+## 24. Configuration philosophy
 
-La macchina è stata impostata come workstation Linux orientata a:
+The machine was set up as a Linux workstation oriented towards:
 
-* audio
+* Audio
 * DSP
-* live coding
-* programmazione
+* Live coding
+* Programming
 * C/C++
 * Python
 * MIDI
@@ -988,11 +726,11 @@ La macchina è stata impostata come workstation Linux orientata a:
 * SuperCollider
 * JACK/PipeWire
 * REAPER
-* spatial audio
-* virtualizzazione
-* Windows per software specifici
+* Spatial audio
+* Virtualization
+* Windows for specific software
 
-La scelta generale è:
+The general stack choice is:
 
 ```text
 CachyOS
@@ -1005,28 +743,28 @@ PipeWire
    +
 JACK compatibility
    +
-low latency 48k / quantum 64
+Low latency 48k / quantum 64
    +
-full pro-audio stack
+Full pro-audio stack
    +
 KVM/libvirt
    +
-WinNino
+Windows 10 VM
 ```
 
 ---
 
-# 30. Nota Fish
+## 25. Fish shell note
 
-I comandi di questo documento sono pensati per:
+The commands in this document are designed for:
 
 ```text
 Fish shell
 ```
 
-Evitare di convertirli automaticamente in Bash.
+Avoid automatically converting them to Bash.
 
-In particolare, non usare Bash heredoc tipo:
+In particular, do not use Bash heredocs like:
 
 ```bash
 cat <<EOF
@@ -1034,13 +772,13 @@ cat <<EOF
 EOF
 ```
 
-quando si lavora direttamente sulla macchina.
+when working directly on the machine.
 
 ---
 
-# 31. Stato complessivo
+## 26. Overall state
 
-## Sistema Linux
+### Linux System
 
 * [x] CachyOS
 * [x] Hyprland
@@ -1060,13 +798,13 @@ quando si lavora direttamente sulla macchina.
 * [x] PHP
 * [x] Node.js
 
-## Audio
+### Audio
 
 * [x] PipeWire
 * [x] WirePlumber
 * [x] ALSA
 * [x] JACK compatibility
-* [x] low latency quantum 64
+* [x] Low latency quantum 64
 * [x] Carla
 * [x] qpwgraph
 * [x] LV2
@@ -1091,34 +829,27 @@ quando si lavora direttamente sulla macchina.
 * [x] SamplV1
 * [x] Spatial audio stack
 
-## Network
+### Network & Virtualization
 
-* [x] Tailscale
 * [x] SSH
-* [x] Gitea access
 * [x] libvirt NAT
 * [x] UFW
-* [x] WinNino Internet
-
-## Virtualizzazione
-
+* [x] VM Internet access
 * [x] QEMU
 * [x] KVM
 * [x] libvirt
 * [x] Virt-Manager
 * [x] OVMF/UEFI
 * [x] SPICE
-* [x] WinNino
+* [x] Win10VM
 * [ ] USB passthrough
-* [ ] shared folders
-* [ ] audio VM
-* [ ] snapshots
-* [ ] backup VM
+* [ ] Shared folders
+* [ ] Audio VM
+* [ ] Snapshots
+* [ ] Backup VM
 
 ---
 
-# Fine storico
+# End of history
 
-**Stato attuale: macchina Linux pronta come workstation audio/dev e WinNino operativo con Internet.**
-
-Max/MSP verrà installato separatamente.
+**Current state: Linux machine ready as an audio/dev workstation and Windows VM operational with Internet.**
